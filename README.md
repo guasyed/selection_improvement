@@ -1,7 +1,8 @@
 # selection_improvement
 Improvement suggestion for sql search query
 
-"SELECT Jobs.id AS `Jobs__id`,
+```
+SELECT Jobs.id AS `Jobs__id`,
   Jobs.name AS `Jobs__name`,
   Jobs.media_id AS `Jobs__media_id`,
   Jobs.job_category_id AS `Jobs__job_category_id`, 
@@ -116,4 +117,6 @@ WHERE ((JobCategories.name LIKE '%キャビンアテンダント%'
     AND (Jobs.deleted) IS NULL)
 GROUP BY Jobs.id
 ORDER BY Jobs.sort_order desc,
-    Jobs.id DESC LIMIT 50 OFFSET 0"
+    Jobs.id DESC LIMIT 50 OFFSET 0
+```
+
