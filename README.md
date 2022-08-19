@@ -120,3 +120,20 @@ ORDER BY Jobs.sort_order desc,
     Jobs.id DESC LIMIT 50 OFFSET 0
 ```
 
+## Inefficient pattern
+
+```
+ OR  Jobs.restriction   LIKE '%キャビンアテンダント%'
+ OR  Jobs.remarks       LIKE '%キャビンアテンダント%'
+ OR  Personalities.name LIKE '%キャビンアテンダント%'
+ 
+ ```
+ 
+* OR prevents use of indexes
+* Leading wildcard in LIKE prevents use of an index
+* WHERE clause touching multiple table
+
+1. Performance of the query can be improved by implementing index on each column that we use to search and filter in each related table.
+2. Use `=` instead of `LIKE`, Ex: `Jobs.restriction LIKE '%キャビンアテンダント%'` to `Jobs.activity = 'キャビンアテンダント'`
+3. Collect the data from all those search columns (restriction, remarks, name, etc) into a single column, perhaps into a new table.
+4. Search only in that column; get the matching id to then JOIN to all the other tables.
