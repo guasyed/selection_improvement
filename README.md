@@ -1,4 +1,4 @@
-# selection_improvement
+# Selection Improvement
 Improvement suggestion for sql search query
 
 ```
